@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.elakito.misc</groupId>
+  <artifactId>escdd_2.13</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>${project.groupId}.${project.artifactId}</name>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+
+    <scala.version>2.13.6</scala.version>
+    <scala.binary.version>2.13</scala.binary.version>
+    <scalatest_2.13.version>3.2.11</scalatest_2.13.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest_2.13</artifactId>
+      <version>${scalatest_2.13.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.3.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+          <args>
+            <arg>-target:jvm-1.8</arg>
+            </args>
+        </configuration>
+        </plugin>
+        <plugin>
+		  <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.surefire.plugin.version}</version>
+	    </plugin>
+      </plugins>
+      <defaultGoal>install</defaultGoal>
+  </build>
+  <profiles>
+    <profile>
+      <id>fastinstall</id>
+        <properties>
+          <maven.test.skip>true</maven.test.skip>
+        </properties>
+    </profile>
+  </profiles>
+</project>
