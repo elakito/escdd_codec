@@ -13,7 +13,8 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
-
+    <scalatest.maven.plugin.version>2.0.0</scalatest.maven.plugin.version>
+    
     <scala.version>2.13.6</scala.version>
     <scala.binary.version>2.13</scala.binary.version>
     <scalatest_2.13.version>3.2.11</scalatest_2.13.version>
@@ -49,15 +50,34 @@
           <scalaVersion>${scala.version}</scalaVersion>
           <args>
             <arg>-target:jvm-1.8</arg>
-            </args>
+          </args>
         </configuration>
-        </plugin>
-        <plugin>
-		  <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven.surefire.plugin.version}</version>
-	    </plugin>
-      </plugins>
-      <defaultGoal>install</defaultGoal>
+      </plugin>
+      <plugin>
+		<artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.plugin.version}</version>
+	  </plugin>
+      <plugin>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-maven-plugin</artifactId>
+        <version>${scalatest.maven.plugin.version}</version>
+        <configuration>
+          <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+          <junitxml>.</junitxml>
+          <filereports>TestSuite.txt</filereports>
+        </configuration>
+        <executions>
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <defaultGoal>install</defaultGoal>
   </build>
   <profiles>
     <profile>
